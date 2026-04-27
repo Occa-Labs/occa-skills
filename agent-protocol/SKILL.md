@@ -1,7 +1,7 @@
 ---
 name: OCCA Runtime — Agent Protocol
 description: How agents call back into OCCA — approvals, hiring, callbacks.
-version: 0.1.0
+version: 0.2.0
 ---
 
 # OCCA Runtime — Agent Protocol
@@ -26,19 +26,26 @@ OCCA runtime:
 agent** to the OCCA server. Send it as `Authorization: Bearer {apiKey}`
 on every call below.
 
-## Two ways to grow capacity
+## Four block-marker actions you can emit
 
-When work is too big or out of your scope, you have two options:
+When you can't finish a task solo, your reply can include ONE marker
+block from the four below. The server parses the JSON body, acts on it,
+and strips the marker before saving your reply.
 
-1. **DELEGATE** — assign work to an existing agent in your subtree.
-   Use this when someone on your team can already do the job.
-2. **HIRE** — bring an entirely new agent onto the team.
-   Use this when no one on your team has the right role for the work.
+1. **HIRE** — bring on a brand-new agent (a role nobody on your team has).
+2. **DELEGATE** — hand a sub-task to an existing teammate (someone in
+   "Available reports" of your wake message).
+3. **BLOCK** — declare you can't proceed until other tasks complete.
+4. **ASK** — pose a question to a teammate or the human; task parks in
+   `review` until the answer comes in.
 
-Both go through the **same approval gate** — you submit a request, the
-human owner approves or rejects, and only after approval does the work
-get created and dispatched. You **never** create tasks or agents
-directly; the contract is "request, exit, get woken when done."
+HIRE and DELEGATE go through the **approval gate** — the human approves
+or rejects before any spawn happens. BLOCK and ASK take effect
+immediately (no approval needed): BLOCK changes your task's status to
+`blocked`, ASK posts a comment that wakes the mentioned agent.
+
+You **never** create tasks or agents directly; the contract is
+"emit marker, exit, get woken when something changes."
 
 ## How to submit a request — primary path: BLOCK MARKERS
 
@@ -96,6 +103,47 @@ outside that list is rejected.
 If "Available reports" is empty, you have no team to delegate to —
 use HIRE instead.
 
+### BLOCK — wait for other tasks to complete
+
+```
+[[OCCA:BLOCK]]
+{
+  "blockedByTaskIds": ["<task uuid>", "..."],
+  "reason": "<short why — auto-posted as a comment on this task>"
+}
+[[/OCCA:BLOCK]]
+```
+
+Use this when your task literally cannot proceed because another task
+hasn't finished. The server parks your task in `blocked` status with
+the listed task ids on `blockedByTaskIds`. When ALL of those blockers
+transition to `done`, the L2 cascade flips your task back to `todo` and
+re-dispatches you automatically — no manual step needed.
+
+`reason` is optional; if provided, it's posted as a system comment on
+your task so the human can see why you're parked.
+
+### ASK — pose a question
+
+```
+[[OCCA:ASK]]
+{
+  "question": "<what you need to know>",
+  "mentionAgentId": "<optional uuid from 'Available reports'>"
+}
+[[/OCCA:ASK]]
+```
+
+Posts your question as a comment on the task. If `mentionAgentId` is
+provided, the server resolves the agent's name and prefixes the comment
+with `@<name>` — that mention wakes the named agent on its assigned
+task so they can reply. If you omit `mentionAgentId`, the human is the
+implicit recipient.
+
+Your task transitions to `review` while waiting for the response. When
+the mentioned agent (or the human) replies via the comment thread, you
+may be re-woken to continue.
+
 ### Rules for marker blocks
 
 - Emit **at most ONE** marker block per turn.
@@ -143,7 +191,13 @@ choose a different path.
 - **Don't fabricate `targetAgentId`.** Use the IDs in the wake preamble.
 - **Don't fabricate `targetRole`.** Use a value from the catalog above.
 - **Don't emit unclosed markers.** Always close `[[OCCA:HIRE]]` with
-  `[[/OCCA:HIRE]]`. Same for DELEGATE.
+  `[[/OCCA:HIRE]]`. Same for DELEGATE, BLOCK, ASK.
+- **Don't BLOCK on yourself.** `blockedByTaskIds` cannot include the
+  task you're currently working on — that creates a deadlock and is
+  rejected.
+- **Don't BLOCK on tasks from other companies.** Blocker ids that don't
+  exist in your company are silently filtered out; if all are filtered,
+  the BLOCK is ignored.
 
 This skill is platform-shipped and lives on every agent. The contract
 above is part of OCCA's stable runtime API — it does not change without
