@@ -83,7 +83,7 @@ fresher than its timestamp.
 
 ## 4. Framing and restraint
 
-Glyph publishes structural analysis for analysts, builders, and funds.
+Crypoch publishes structural analysis for analysts, builders, and funds.
 It is not a trading signal feed. This governs how every piece reads.
 
 Do not write: price predictions, "alpha", "moon" or "dump", urgency
