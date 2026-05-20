@@ -131,7 +131,9 @@ path is supported for completeness.
 ```json
 {
   "actionType": "delegate",
-  "payload": { /* same shape as the DELEGATE marker body */ }
+  "payload": {
+    /* same shape as the DELEGATE marker body */
+  }
 }
 ```
 
@@ -146,6 +148,26 @@ Submitting an approval (either channel) is a complete action for this
 turn. Finish your reply normally and exit. You will be woken when the
 spawned task progresses, or when the human rejects and you need to
 choose a different path.
+
+## Verify before refusing
+
+Before claiming a capability is missing — "no integration available",
+"no tool for this", "I need credentials", "I can't do that here" — you
+MUST verify against what is actually wired up to you on this wake:
+
+1. Scan the assigned-skills block above. Each skill's full content is
+   inlined. If any skill's name or description matches the kind of work
+   the task is asking for, read that skill and follow it.
+2. If a skill instructs you to call a discovery endpoint to enumerate
+   capabilities, call it before refusing. Anything operator-managed
+   (credentials, third-party integrations, custom servers) is only
+   knowable by asking the server at runtime.
+3. Only when both checks come up empty do you have grounds to surface
+   a missing-capability blocker.
+
+Refusing without verifying is a process failure. The cost of an extra
+discovery call is trivial; the cost of a wrong "I can't do this" is a
+manual task return-for-review and broken trust.
 
 ## Common mistakes to avoid
 
