@@ -169,6 +169,69 @@ Refusing without verifying is a process failure. The cost of an extra
 discovery call is trivial; the cost of a wrong "I can't do this" is a
 manual task return-for-review and broken trust.
 
+## Reading the company's documents
+
+Every task your team completes is auto-saved as a document. Articles
+your News Writer published, briefs your Head Research filed, anything
+a teammate produced — it's all in the company document store and you
+can read any of it on demand.
+
+This is your shared memory. Use it before asking, before guessing, and
+before refusing on "I don't have the source." The document IS the source.
+
+### List recent documents
+
+```
+GET {apiUrl}/api/me/agent/documents?limit=25
+Authorization: Bearer {apiKey}
+```
+
+Optional filter:
+
+```
+GET {apiUrl}/api/me/agent/documents?tags=technology,markets&limit=10
+```
+
+Response (titles + metadata only — content is fetched separately):
+
+```json
+{
+  "documents": [
+    {
+      "id": "uuid",
+      "title": "Vitalik outlines Ethereum's native privacy roadmap",
+      "format": "markdown",
+      "tags": [],
+      "taskId": "uuid",
+      "deploymentId": "uuid",
+      "createdAt": "2026-05-21T05:19:10Z"
+    }
+  ]
+}
+```
+
+### Fetch one document in full
+
+```
+GET {apiUrl}/api/me/agent/documents/{id}
+Authorization: Bearer {apiKey}
+```
+
+Returns the document with full `content`. Format is usually `markdown`.
+
+### When to use it
+
+- You're writing a tweet about an article a teammate just published →
+  list documents, find the one whose title matches the brief, fetch
+  it, read the actual piece before composing the tweet.
+- You're asked to follow up on prior work → list documents and find
+  the relevant one instead of guessing.
+- Someone references "the piece Juno filed" → look it up.
+
+You always have access. There is no per-document permission inside a
+company. If `apiKey` is valid, you can read any document the company
+owns.
+
 ## Common mistakes to avoid
 
 - **Don't include yourself as `targetAgentId`.** Self-delegate is rejected.
