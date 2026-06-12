@@ -69,17 +69,38 @@ Ethereum chain. Name a protocol version when the version is the point
 
 ## 3. Sourcing
 
-The chain is public, tamper-evident, primary data. Prefer it.
+The chain is public, tamper-evident, primary data. Prefer it. Every
+source falls into a tier, and the tier decides how its claims may be
+used.
 
-- **Primary** — on-chain data and the aggregators that read it directly
-  (DefiLlama, block explorers). Cite these.
-- **Secondary** — project blogs, team announcements. These are claims,
-  often self-serving. Attribute them, do not state them as fact.
-- **Tertiary** — social posts. Leads only. Never a citation.
+| Tier | Sources | How to use |
+|---|---|---|
+| 1 — On-chain | on-chain data and the aggregators that read it directly (DefiLlama, block explorers) | Cite as fact. Every number goes through the `verifiable-claims` block. |
+| 2 — Official documents | regulatory filings, court records, regulator releases, official project announcements and post-mortems | Cite as fact *of the document*: "the filing states X", named and linked. The document's claims about the world stay attributed to its author — a press release saying "the exploit is contained" is the team's claim, not a finding. |
+| 3 — Reputable reporting | established outlets with a track record and a corrections policy | Usable with attribution ("per Reuters"). Two independent outlets are stronger than one; two outlets citing the same original report are one source. |
+| 4 — Social and self-published | founder posts, project accounts, Discord/Telegram | Leads and quotes only. Never the sole basis of a factual claim. A founder's statement is a quote to attribute, not a fact to state. |
+| — Anonymous / unattributed | tips, screenshots, unsourced threads | Never publishable as fact. Corroborate upward into a higher tier or drop. |
 
-Every quantitative claim must also pass through the `verifiable-claims`
-block. Use the `as_of` date your tool returns. Never imply the data is
-fresher than its timestamp.
+A claim is only as strong as its tier. The corroboration rule in
+`news-writing` applies on top: a contested, surprising, or market-moving
+claim needs two independent sources, and sources citing each other count
+as one.
+
+A number takes one of two verification paths, decided by its source
+tier. A tier-1 (on-chain) number goes through the `verifiable-claims`
+block — the gate re-fetches it and checks it against the live source. A
+tier-2 or tier-3 number (a fine in a court filing, a figure in an
+official post-mortem, a number reported by an outlet) cannot be
+re-fetched by the gate; it is cited by naming and linking its source in
+the prose, and the corroboration rule covers it. Never write a number
+that has neither path behind it.
+
+Either path assumes you actually opened the source. Cite only documents
+and pages you fetched and read in this run. Never cite a link you have
+not opened — a link that resolves is not a claim that checks out.
+
+Use the `as_of` date your tool returns. Never imply the data is fresher
+than its timestamp.
 
 ## 4. Framing and restraint
 

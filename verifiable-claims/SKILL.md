@@ -1,21 +1,27 @@
 ---
 name: verifiable-claims
-description: Required output format for any story, research note, or report that cites numbers (TVL, trading volume, price, market cap, fees, percentages). Use whenever writing a document that contains quantitative claims. Defines the <!--occa:claims--> block that the OCCA verification gate re-fetches and diffs against live sources before the document is accepted for publication.
+description: Required output format for any story, research note, or report that cites on-chain numbers (TVL, trading volume, price, market cap, fees — figures read from on-chain data tools). Defines the <!--occa:claims--> block that the OCCA verification gate re-fetches and diffs against live sources before the document is accepted for publication. Off-chain figures (court filings, official statements, outlet reporting) do not go in the block — they take the attribution path defined in crypto-news-domain.
 source: OCCA (internal)
 installed: 2026-05-18
 ---
 
 # Verifiable claims
 
-Every document you publish that contains numbers passes through an
-automated verification gate. The gate re-fetches each number from its
-source and compares it to what you wrote. It is plain code, not a
-reviewer you can persuade. If a number does not match its source, the
-document is rejected and sent back to you with the exact discrepancy.
+Every document you publish passes through an automated verification
+gate. The gate re-fetches each on-chain number you declared and compares
+it to what you wrote. It is plain code, not a reviewer you can persuade.
+If a number does not match its source, the document is rejected and sent
+back to you with the exact discrepancy.
 
 This skill defines the structured `<!--occa:claims-->` block the gate
-reads. A document with quantitative claims and no valid block is
-rejected before it is even checked.
+reads. The block covers on-chain numbers — figures you read from your
+on-chain data tools. A story whose figures all come from documents or
+outlets (a fine in a court filing, a number in an official post-mortem)
+legitimately carries no block; those figures take the attribution path
+in `crypto-news-domain` instead. But cut no corners the other way: an
+on-chain number in the prose with no claim row, a block the gate cannot
+parse, or a run that called on-chain data tools yet shipped no block at
+all is a rejection.
 
 ## The non-negotiable workflow
 
@@ -40,8 +46,11 @@ numbers.
 - **No retrieval, no claim.** If you did not fetch a number with a tool,
   it cannot appear in the story. There is no such thing as a number you
   "know."
-- **Every number in the prose has a matching claim row.** A figure in
-  the body with no row in the block fails the gate.
+- **Every on-chain number in the prose has a matching claim row.** A
+  figure read from a data tool that appears in the body with no row in
+  the block fails the gate. An off-chain figure is instead named and
+  linked to its document per `crypto-news-domain` — never silently
+  unsourced.
 - **`as_of` is the envelope date.** Your task prompt begins with a
   header like `[Mon 2026-05-18 07:22 UTC]`. That bracket is today's
   date. Use it. Never derive a date from a Unix timestamp, a data

@@ -34,6 +34,15 @@ The hard rule: no factual sentence without a source behind it. A
 sentence of analysis or interpretation is allowed, but it must read as
 clearly your read of the data, not as a smuggled fact.
 
+**Corroboration.** A routine fact from a primary source needs that one
+source. A claim that is contested, surprising, market-moving, or rests
+on an unnamed source needs at least two independent sources before it
+ships — independent meaning neither derives from the other (two articles
+citing the same tweet are one source, not two). No second source? Then
+the claim does not run as fact: either cut it, or report the dispute
+itself with explicit attribution ("X claims..., unconfirmed"). A rumor
+is verified or knocked down — it is never repeated as fact.
+
 ## 2. Structure
 
 **Lede.** Lead with the news or the sharpest finding. Never open with
@@ -128,6 +137,8 @@ to three times.
 - Is there a factual sentence with no source behind it? Cut or source it.
 - Is any number in the prose missing from the `<!--occa:claims-->` block?
 - Is any attribution unnamed?
+- Is any contested, surprising, or single-source claim presented as
+  settled fact without a second independent source?
 - Does any claim state causation where the data only shows correlation?
 
 **Layer 2, prose:**
