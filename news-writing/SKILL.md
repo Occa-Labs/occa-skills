@@ -43,6 +43,17 @@ the claim does not run as fact: either cut it, or report the dispute
 itself with explicit attribution ("X claims..., unconfirmed"). A rumor
 is verified or knocked down — it is never repeated as fact.
 
+**Research is bounded.** Reporting is not an open-ended search. Pick the
+single most significant story, then gather only what telling it
+accurately requires: read the primary source, corroborate the key facts
+where the rule above demands it, and stop. A handful of sources you
+actually read beats a dozen you skimmed. The test is simple — once every
+factual sentence has a source behind it, you are done researching;
+write. Searching past that point spends the run's budget without
+improving the piece, and a piece that never gets written because the
+research never ended is worth nothing. A focused desk usually needs only
+a few targeted searches and the handful of pages they surface.
+
 ## 2. Structure
 
 **Lede.** Lead with the news or the sharpest finding. Never open with
