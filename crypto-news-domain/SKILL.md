@@ -1,6 +1,6 @@
 ---
 name: crypto-news-domain
-description: Domain judgment for writing crypto news and research. Use whenever covering on-chain activity, protocols, tokens, or markets. Defines how to read on-chain metrics (what is signal vs noise), name protocols and chains correctly, source against primary on-chain data, and frame a piece for an analyst audience without hype. Layers on top of the generic journalism skills; sits beside verifiable-claims.
+description: Domain judgment for writing crypto news and research. Use whenever covering on-chain activity, protocols, tokens, or markets. Defines how to read on-chain metrics (what is signal vs noise), name protocols and chains correctly, source against primary on-chain data, and frame a piece for an analyst audience without hype. Layers on top of the generic journalism (news-writing) skill.
 source: OCCA (internal)
 installed: 2026-05-19
 ---
@@ -13,9 +13,9 @@ It is judgment, not a fact sheet. Specific numbers and protocol states
 come from your data tools at the moment you write; what follows is how
 to read them.
 
-This skill does not replace `verifiable-claims`. That one defines the
-required output format for numbers. This one is about understanding what
-the numbers mean before you write them.
+This skill is about understanding what the numbers mean before you write
+them. `news-writing` covers the craft and the rule that every number is
+read directly from a tool result, never typed from memory.
 
 ## 1. Reading on-chain metrics
 
@@ -75,7 +75,7 @@ used.
 
 | Tier | Sources | How to use |
 |---|---|---|
-| 1 — On-chain | on-chain data and the aggregators that read it directly (DefiLlama, block explorers) | Cite as fact. Every number goes through the `verifiable-claims` block. |
+| 1 — On-chain | on-chain data and the aggregators that read it directly (DefiLlama, block explorers) | Cite as fact. Read the number directly from your data tool and record it exactly as returned. |
 | 2 — Official documents | regulatory filings, court records, regulator releases, official project announcements and post-mortems | Cite as fact *of the document*: "the filing states X", named and linked. The document's claims about the world stay attributed to its author — a press release saying "the exploit is contained" is the team's claim, not a finding. |
 | 3 — Reputable reporting | established outlets with a track record and a corrections policy | Usable with attribution ("per Reuters"). Two independent outlets are stronger than one; two outlets citing the same original report are one source. |
 | 4 — Social and self-published | founder posts, project accounts, Discord/Telegram | Leads and quotes only. Never the sole basis of a factual claim. A founder's statement is a quote to attribute, not a fact to state. |
@@ -86,14 +86,13 @@ A claim is only as strong as its tier. The corroboration rule in
 claim needs two independent sources, and sources citing each other count
 as one.
 
-A number takes one of two verification paths, decided by its source
-tier. A tier-1 (on-chain) number goes through the `verifiable-claims`
-block — the gate re-fetches it and checks it against the live source. A
-tier-2 or tier-3 number (a fine in a court filing, a figure in an
-official post-mortem, a number reported by an outlet) cannot be
-re-fetched by the gate; it is cited by naming and linking its source in
-the prose, and the corroboration rule covers it. Never write a number
-that has neither path behind it.
+A number's source tier decides how you back it. A tier-1 (on-chain)
+number you read directly from your data tool is citable as fact — record
+it exactly as the tool returned it, never typed from memory. A tier-2 or
+tier-3 number (a fine in a court filing, a figure in an official
+post-mortem, a number reported by an outlet) is cited by naming and
+linking the source you read it in, and the corroboration rule covers it.
+Never write a number that has neither behind it.
 
 Either path assumes you actually opened the source. Cite only documents
 and pages you fetched and read in this run. Never cite a link you have

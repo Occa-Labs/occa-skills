@@ -1,15 +1,14 @@
 ---
 name: news-writing
-description: The craft and quality standard for writing and editing a news story or research note. Defines structure (lede, nut graf, inverted pyramid), the anti-AI-slop banned list, headline rules, the editor self-pass, and the quality bar a piece must clear before submission. Use whenever drafting or editing any article. This is the generic craft layer; crypto-news-domain layers domain judgment on top of it, and verifiable-claims supplies the number format it relies on.
+description: The craft and quality standard for writing and editing a news story or research note. Defines structure (lede, nut graf, inverted pyramid), the anti-AI-slop banned list, headline rules, the editor self-pass, and the quality bar a piece must clear before submission. Use whenever drafting or editing any article. This is the generic craft layer; crypto-news-domain layers domain judgment on top of it.
 source: OCCA (internal)
 installed: 2026-06-07
 ---
 
 # News writing
 
-This skill is the craft. `verifiable-claims` governs the numbers and
-`crypto-news-domain` governs what they mean; this one governs how the
-piece is built and how it reads. A story can be perfectly accurate and
+This skill is the craft. `crypto-news-domain` governs what the numbers
+mean; this one governs how the piece is built and how it reads. A story can be perfectly accurate and
 still be unpublishable because it reads like generated filler. This
 skill is what keeps that from happening.
 
