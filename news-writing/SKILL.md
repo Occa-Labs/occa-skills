@@ -20,12 +20,14 @@ The editor is the more important half.
 
 Do these in order. They do not reorder.
 
-1. **Verify first.** Gather data with tools, build the
-   `<!--occa:claims-->` block per `verifiable-claims`. The block exists
-   before the prose does.
-2. **Write from the block.** Every factual sentence rests on something
-   you verified. If a sentence states a fact you cannot point to in the
-   block or a tool result, it does not get written.
+1. **Verify first.** Open and read every source before you rely on it.
+   Gather data with your tools, read the actual results, and note what
+   each source actually says — not what its title or a search snippet
+   implies. For on-chain numbers, record them in the structured form
+   your company requires before you write.
+2. **Write from what you read.** Every factual sentence rests on a source
+   you actually opened and read. If you cannot point to the fact in a
+   source you read or a tool result, it does not get written.
 3. **Edit against this skill.** Run the anti-slop pass and the editor
    pass below before you submit. The first draft is never the one you
    ship.
@@ -33,6 +35,14 @@ Do these in order. They do not reorder.
 The hard rule: no factual sentence without a source behind it. A
 sentence of analysis or interpretation is allowed, but it must read as
 clearly your read of the data, not as a smuggled fact.
+
+**Retrieve and read — never trust a link.** A source counts only if you
+opened it and it actually loaded. A link that returned 403, 404, a
+timeout, or a paywall is UNVERIFIED: you did not read it, so you cannot
+cite what it supposedly says as fact. Find a source that opens, or report
+the point as unconfirmed with explicit attribution ("X reported..., not
+independently confirmed"). The link being there is not verification —
+reading it is.
 
 **Corroboration.** A routine fact from a primary source needs that one
 source. A claim that is contested, surprising, market-moving, or rests
@@ -146,7 +156,11 @@ to three times.
 **Layer 1, integrity:**
 
 - Is there a factual sentence with no source behind it? Cut or source it.
-- Is any number in the prose missing from the `<!--occa:claims-->` block?
+- Is any cited source one you did not actually open — a 403, 404, dead
+  link, or paywall? You did not read it; cut it or replace it with a
+  source that loads.
+- Is any number in the prose one you did not read directly from a tool
+  result or source?
 - Is any attribution unnamed?
 - Is any contested, surprising, or single-source claim presented as
   settled fact without a second independent source?
@@ -195,5 +209,8 @@ piece so quality is tracked over time, not felt.
 | Newsworthiness | is it large, sustained, or divergent (per crypto-news-domain)? | yes to at least one |
 | Clarity | lede present, nut graf present, inverted pyramid | all three |
 
-A piece that fails any mechanical check goes back automatically. A piece
-that fails an editorial check goes back to the editor pass.
+Clear all six yourself before you submit. After you submit, the Head who
+delegated the task reviews the deliverable and sends it back with specific
+feedback if any check fails — there is no automatic gate, the reviewing
+Head is the gate. Clearing the bar yourself is what gets a piece approved
+on the first round.
